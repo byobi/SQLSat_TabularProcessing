@@ -10,16 +10,15 @@
         "connectionDetails": {
           "protocol": "tds",
           "address": {
-            "server": "opifex-demo-sql01.database.windows.net",
-            "database": "ASPP_AdventureWorksDW"
+            "server": "localhost",
+            "database": "AWDW_SQLSat_TabularProcessing"
           },
           "authentication": null,
           "query": null
         },
+        "options": {},
         "credential": {
           "AuthenticationKind": "UsernamePassword",
-          "kind": "SQL",
-          "path": "opifex-demo-sql01.database.windows.net;ASPP_AdventureWorksDW",
           "Username": "demo-admin",
           "EncryptConnection": false
         }
