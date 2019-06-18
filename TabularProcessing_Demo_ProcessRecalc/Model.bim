@@ -16,9 +16,9 @@
           "authentication": null,
           "query": null
         },
+        "options": {},
         "credential": {
-          "AuthenticationKind": "UsernamePassword",
-          "Username": "demo-admin",
+          "AuthenticationKind": "ServiceAccount",
           "EncryptConnection": false
         }
       }

@@ -18,14 +18,12 @@
 		GO
 		USE AWDW_SQLSat_TabularProcessing;
 		GO
-
-		{
-		  "delete": {
-			"object": {
-			  "database": "AWDW_SQLSat_TabularProcessing"
-			}
-		  }
-		}
+		
+		/* REMOVE DATA FOR 2014 */
+		DELETE 
+		FROM	dbo.FactInternetSales
+		WHERE	OrderDateKey BETWEEN 20140101 AND 20141231
+		;
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
@@ -40,7 +38,7 @@
 	3. query tabular model (DAX Studio)
 
 	(commands below)
-	4. delete transactions from 2014
+	4. add transactions from 2014
 	5. process tabular model (ProcessDefault)
 	6. query tabular model (DAX Studio)
 	7. process tabular model (ProcessFull)
@@ -53,22 +51,8 @@
 USE AWDW_SQLSat_TabularProcessing;
 GO
 
-ALTER TABLE dbo.FactInternetSalesReason
-	DROP CONSTRAINT FK_FactInternetSalesReason_FactInternetSales
-;
-GO
 
-DELETE 
-FROM	dbo.FactInternetSales
-WHERE	OrderDateKey BETWEEN 20140101 AND 20141231
-;
-
-/* process default */
-/* re-run DAX query */
-/* process full */
-/* re-run DAX query */
-
-/* clean up (if necessary) */
+/* Add transactions for 2014 */
 INSERT INTO dbo.FactInternetSales
     (
         ProductKey,
@@ -129,9 +113,13 @@ WHERE	OrderDateKey BETWEEN 20140101 AND 20141231
 ;
 GO
 
-ALTER TABLE dbo.FactInternetSalesReason
-	ADD CONSTRAINT FK_FactInternetSalesReason_FactInternetSales
-		FOREIGN KEY (SalesOrderNumber, SalesOrderLineNumber)
-		REFERENCES dbo.FactInternetSales (SalesOrderNumber, SalesOrderLineNumber)
+SELECT	COUNT(*), SUM(SalesAmount)
+FROM	dbo.FactInternetSales
+WHERE	OrderDateKey BETWEEN 20140101 AND 20141231
 ;
-GO
+
+
+/* process default */
+/* re-run DAX query */
+/* process full */
+/* re-run DAX query */

@@ -19,12 +19,7 @@
 		USE AWDW_SQLSat_TabularProcessing;
 		GO
 
-
 		/* REMOVE DATA FOR 2014 */
-		ALTER TABLE dbo.FactInternetSalesReason
-			DROP CONSTRAINT FK_FactInternetSalesReason_FactInternetSales
-		;
-		GO
 		DELETE 
 		FROM	dbo.FactInternetSales
 		WHERE	OrderDateKey BETWEEN 20140101 AND 20141231
@@ -55,6 +50,7 @@
 USE AWDW_SQLSat_TabularProcessing;
 GO
 
+/* Add transactions for 2014 */
 INSERT INTO dbo.FactInternetSales
     (
         ProductKey,
@@ -112,12 +108,5 @@ SELECT	ProductKey,
         ShipDate
 FROM	dbo.FactInternetSales_BACKUP
 WHERE	OrderDateKey BETWEEN 20140101 AND 20141231
-;
-GO
-
-ALTER TABLE dbo.FactInternetSalesReason
-	ADD CONSTRAINT FK_FactInternetSalesReason_FactInternetSales
-		FOREIGN KEY (SalesOrderNumber, SalesOrderLineNumber)
-		REFERENCES dbo.FactInternetSales (SalesOrderNumber, SalesOrderLineNumber)
 ;
 GO
