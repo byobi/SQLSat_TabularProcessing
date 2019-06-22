@@ -127,13 +127,11 @@
         "measures": [
           {
             "name": "DaysCurrentQuarterToDate",
-            "expression": "COUNTROWS( DATESQTD( 'Date'[Date])) ",
-            "detailRowsDefinition": {}
+            "expression": "COUNTROWS( DATESQTD( 'Date'[Date])) "
           },
           {
             "name": "DaysInCurrentQuarter",
-            "expression": "COUNTROWS( DATESBETWEEN( 'Date'[Date], STARTOFQUARTER( LASTDATE('Date'[Date])), ENDOFQUARTER('Date'[Date])))",
-            "detailRowsDefinition": {}
+            "expression": "COUNTROWS( DATESBETWEEN( 'Date'[Date], STARTOFQUARTER( LASTDATE('Date'[Date])), ENDOFQUARTER('Date'[Date])))"
           }
         ],
         "hierarchies": [
@@ -323,20 +321,6 @@
             "name": "ShipDate",
             "dataType": "dateTime",
             "sourceColumn": "ShipDate"
-          },
-          {
-            "type": "calculated",
-            "name": "Margin",
-            "dataType": "decimal",
-            "isDataTypeInferred": true,
-            "expression": "[SalesAmount]-[TotalProductCost]",
-            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
-            "annotations": [
-              {
-                "name": "Format",
-                "value": "<Format Format=\"Currency\" Accuracy=\"2\" ThousandSeparator=\"True\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
-              }
-            ]
           }
         ],
         "partitions": [
@@ -368,274 +352,15 @@
         ],
         "measures": [
           {
-            "name": "InternetCurrentQuarterMargin",
-            "expression": "TOTALQTD([InternetTotalMargin],'Date'[Date])",
-            "formatString": "\\$#,0;(\\$#,0);\\$#,0",
-            "detailRowsDefinition": {},
-            "annotations": [
-              {
-                "name": "Format",
-                "value": "<Format Format=\"Currency\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
-              }
-            ]
-          },
-          {
-            "name": "InternetCurrentQuarterSales",
-            "expression": "TOTALQTD([InternetTotalSales],'Date'[Date])",
-            "formatString": "\\$#,0;(\\$#,0);\\$#,0",
-            "detailRowsDefinition": {},
-            "annotations": [
-              {
-                "name": "Format",
-                "value": "<Format Format=\"Currency\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
-              }
-            ]
-          },
-          {
-            "name": "InternetDistinctCountSalesOrder",
-            "expression": "DISTINCTCOUNT([SalesOrderNumber])",
-            "formatString": "#,0",
-            "detailRowsDefinition": {}
-          },
-          {
-            "name": "InternetOrderLinesCount",
-            "expression": "COUNTA([SalesOrderLineNumber])",
-            "formatString": "#,0",
-            "detailRowsDefinition": {}
-          },
-          {
-            "name": "InternetPreviousQuarterMargin",
-            "expression": "CALCULATE([InternetTotalMargin],PREVIOUSQUARTER('Date'[Date]))",
-            "formatString": "\\$#,0;(\\$#,0);\\$#,0",
-            "detailRowsDefinition": {},
-            "annotations": [
-              {
-                "name": "Format",
-                "value": "<Format Format=\"Currency\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
-              }
-            ]
-          },
-          {
-            "name": "InternetPreviousQuarterMarginProportionToQTD",
-            "expression": "[InternetPreviousQuarterMargin]*([DaysCurrentQuarterToDate]/[DaysInCurrentQuarter])",
-            "formatString": "\\$#,0;(\\$#,0);\\$#,0",
-            "detailRowsDefinition": {},
-            "annotations": [
-              {
-                "name": "Format",
-                "value": "<Format Format=\"Currency\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
-              }
-            ]
-          },
-          {
-            "name": "InternetPreviousQuarterSales",
-            "expression": "CALCULATE([InternetTotalSales],PREVIOUSQUARTER('Date'[Date]))",
-            "formatString": "\\$#,0;(\\$#,0);\\$#,0",
-            "detailRowsDefinition": {},
-            "annotations": [
-              {
-                "name": "Format",
-                "value": "<Format Format=\"Currency\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
-              }
-            ]
-          },
-          {
-            "name": "InternetPreviousQuarterSalesProportionToQTD",
-            "expression": "[InternetPreviousQuarterSales]*([DaysCurrentQuarterToDate]/[DaysInCurrentQuarter])",
-            "formatString": "\\$#,0;(\\$#,0);\\$#,0",
-            "detailRowsDefinition": {},
-            "annotations": [
-              {
-                "name": "Format",
-                "value": "<Format Format=\"Currency\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
-              }
-            ]
-          },
-          {
-            "name": "InternetTotalDiscountAmount",
-            "expression": "SUM([DiscountAmount])",
-            "formatString": "\\$#,0;(\\$#,0);\\$#,0",
-            "detailRowsDefinition": {},
-            "annotations": [
-              {
-                "name": "Format",
-                "value": "<Format Format=\"Currency\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
-              }
-            ]
-          },
-          {
-            "name": "InternetTotalFreight",
-            "expression": "SUM([Freight])",
-            "formatString": "\\$#,0;(\\$#,0);\\$#,0",
-            "detailRowsDefinition": {},
-            "annotations": [
-              {
-                "name": "Format",
-                "value": "<Format Format=\"Currency\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
-              }
-            ]
-          },
-          {
-            "name": "InternetTotalMargin",
-            "expression": "SUM([Margin])",
-            "formatString": "\\$#,0;(\\$#,0);\\$#,0",
-            "detailRowsDefinition": {},
-            "annotations": [
-              {
-                "name": "Format",
-                "value": "<Format Format=\"Currency\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
-              }
-            ]
-          },
-          {
-            "name": "InternetTotalProductCost",
-            "expression": "SUM([TotalProductCost])",
-            "formatString": "\\$#,0;(\\$#,0);\\$#,0",
-            "detailRowsDefinition": {},
-            "annotations": [
-              {
-                "name": "Format",
-                "value": "<Format Format=\"Currency\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
-              }
-            ]
-          },
-          {
             "name": "InternetTotalSales",
             "expression": "SUM([SalesAmount])",
             "formatString": "\\$#,0;(\\$#,0);\\$#,0",
-            "detailRowsDefinition": {},
             "annotations": [
               {
                 "name": "Format",
                 "value": "<Format Format=\"Currency\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
               }
             ]
-          },
-          {
-            "name": "InternetTotalTaxAmt",
-            "expression": "SUM([TaxAmt])",
-            "formatString": "\\$#,0;(\\$#,0);\\$#,0",
-            "detailRowsDefinition": {},
-            "annotations": [
-              {
-                "name": "Format",
-                "value": "<Format Format=\"Currency\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
-              }
-            ]
-          },
-          {
-            "name": "InternetTotalUnits",
-            "expression": "SUM([OrderQuantity])",
-            "formatString": "#,0",
-            "detailRowsDefinition": {}
-          },
-          {
-            "name": "YTD InternetTotalSales",
-            "expression": "CALCULATE([InternetTotalSales], DATESYTD('Date'[Date]))",
-            "formatString": "\\$#,0;(\\$#,0);\\$#,0",
-            "detailRowsDefinition": {},
-            "annotations": [
-              {
-                "name": "Format",
-                "value": "<Format Format=\"Currency\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
-              }
-            ]
-          },
-          {
-            "name": "InternetCurrentQuarterMarginPerformance",
-            "expression": "IF([InternetPreviousQuarterMarginProportionToQTD]<>0,([InternetCurrentQuarterMargin]-[InternetPreviousQuarterMarginProportionToQTD])/[InternetPreviousQuarterMarginProportionToQTD],BLANK())",
-            "kpi": {
-              "targetExpression": "1.25",
-              "statusGraphic": "Shapes",
-              "statusExpression": [
-                "var x='Internet Sales'[InternetCurrentQuarterMarginPerformance] return",
-                "            if(ISBLANK(x),BLANK(),",
-                "                    If(x<0.8,-1,",
-                "\t                If(x<1.03,0,1)",
-                "                )",
-                "            )",
-                "            "
-              ],
-              "annotations": [
-                {
-                  "name": "GoalType",
-                  "value": "StaticValue"
-                },
-                {
-                  "name": "KpiStatusType",
-                  "value": "Linear"
-                },
-                {
-                  "name": "KpiThresholdType",
-                  "value": "Absolute"
-                },
-                {
-                  "name": "KpiThresholdOrdering",
-                  "value": "Ascending"
-                },
-                {
-                  "name": "KpiThresholdCount",
-                  "value": "2"
-                },
-                {
-                  "name": "KpiThreshold_0",
-                  "value": "0.8"
-                },
-                {
-                  "name": "KpiThreshold_1",
-                  "value": "1.03"
-                }
-              ]
-            },
-            "detailRowsDefinition": {}
-          },
-          {
-            "name": "InternetCurrentQuarterSalesPerformance",
-            "expression": "IFERROR([InternetCurrentQuarterSales]/[InternetPreviousQuarterSalesProportionToQTD],BLANK())",
-            "kpi": {
-              "targetExpression": "1.1",
-              "statusGraphic": "Shapes",
-              "statusExpression": [
-                "var x='Internet Sales'[InternetCurrentQuarterSalesPerformance] return",
-                "            if(ISBLANK(x),BLANK(),",
-                "                    If(x<1,-1,",
-                "\t                If(x<1.07,0,1)",
-                "                )",
-                "            )",
-                "            "
-              ],
-              "annotations": [
-                {
-                  "name": "GoalType",
-                  "value": "StaticValue"
-                },
-                {
-                  "name": "KpiStatusType",
-                  "value": "Linear"
-                },
-                {
-                  "name": "KpiThresholdType",
-                  "value": "Absolute"
-                },
-                {
-                  "name": "KpiThresholdOrdering",
-                  "value": "Ascending"
-                },
-                {
-                  "name": "KpiThresholdCount",
-                  "value": "2"
-                },
-                {
-                  "name": "KpiThreshold_0",
-                  "value": "1"
-                },
-                {
-                  "name": "KpiThreshold_1",
-                  "value": "1.07"
-                }
-              ]
-            },
-            "detailRowsDefinition": {}
           }
         ]
       }
