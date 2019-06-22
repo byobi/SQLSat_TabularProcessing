@@ -1,5 +1,4 @@
 
-
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	RESET SOURCE DB
@@ -19,10 +18,10 @@
 		USE AWDW_SQLSat_TabularProcessing;
 		GO
 
-		/* REMOVE DATA FOR 2014 */
+		/* REMOVE DATA FOR 2013 & 2014 */
 		DELETE 
 		FROM	dbo.FactInternetSales
-		WHERE	OrderDateKey BETWEEN 20140101 AND 20141231
+		WHERE	OrderDateKey BETWEEN 20130101 AND 20141231
 		;
 
 
@@ -50,7 +49,7 @@
 USE AWDW_SQLSat_TabularProcessing;
 GO
 
-/* Add transactions for 2014 */
+/* Add transactions for 2014 and 2013 */
 INSERT INTO dbo.FactInternetSales
     (
         ProductKey,
@@ -107,6 +106,13 @@ SELECT	ProductKey,
         DueDate,
         ShipDate
 FROM	dbo.FactInternetSales_BACKUP
-WHERE	OrderDateKey BETWEEN 20140101 AND 20141231
+WHERE	OrderDateKey BETWEEN 20130101 AND 20141231
 ;
 GO
+
+SELECT	YEAR(OrderDate), COUNT(*), SUM(SalesAmount)
+FROM	dbo.FactInternetSales
+GROUP BY YEAR(OrderDate)
+ORDER BY 1
+;
+
