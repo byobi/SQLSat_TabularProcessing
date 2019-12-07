@@ -36,7 +36,7 @@
 	2. query tabular model (DAX Studio)
 
 	(commands below)
-	3. add transactions from 2014
+	3. add transactions from 2014 & 2013
 	4. process FactInternetSales (ProcessData)
 	5. query tabular model (DAX Studio)
 	6. process tabular model (ProcessRecalc)
@@ -110,9 +110,18 @@ WHERE	OrderDateKey BETWEEN 20130101 AND 20141231
 ;
 GO
 
-SELECT	YEAR(OrderDate), COUNT(*), SUM(SalesAmount)
+SELECT	yr = YEAR(OrderDate), rc = COUNT(*), total_amt = SUM(SalesAmount)
 FROM	dbo.FactInternetSales
 GROUP BY YEAR(OrderDate)
 ORDER BY 1
 ;
 
+
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+	4. process FactInternetSales (ProcessData)
+	5. query tabular model (DAX Studio)
+	6. process tabular model (ProcessRecalc)
+	7. query tabular model (DAX Studio)
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/

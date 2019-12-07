@@ -9,13 +9,6 @@ ORDER BY 'Date'[CalendarYear]
 
 
 
-EVALUATE (
-	SUMMARIZECOLUMNS(
-		'Internet Sales'[OrderDate],
-		"InternetTotalSales", [InternetTotalSales]
-	)
-)
-ORDER BY 'Internet Sales'[OrderDate] DESC
 
 
 

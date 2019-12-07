@@ -30,7 +30,7 @@
 	
 	DEMO 00
 	------------------------------------------------------
-	0. delete tabular model
+	0. DELETE tabular model
 	1. deploy tabular model
 	2. process tabular model (ProcessDefault)
 	3. query tabular model (DAX Studio)
@@ -111,7 +111,7 @@ WHERE	OrderDateKey BETWEEN 20140101 AND 20141231
 ;
 GO
 
-SELECT	COUNT(*), SUM(SalesAmount)
+SELECT	rc = COUNT(*), total_sales = SUM(SalesAmount)
 FROM	dbo.FactInternetSales
 WHERE	OrderDateKey BETWEEN 20140101 AND 20141231
 ;
